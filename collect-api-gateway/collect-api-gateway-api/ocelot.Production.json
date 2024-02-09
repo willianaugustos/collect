@@ -1,0 +1,31 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v2/calculate/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dockerapp1",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/calculate2/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/calculate/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dockerapp2",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/calculate1/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8080"
+  }
+}

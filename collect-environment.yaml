@@ -1,0 +1,37 @@
+version : '3'
+services: # Services to deploy
+
+  dockerapp1:
+    image: dockerapp #image name, Default:- Folder Name
+    build:
+      context: collect-calculator.query
+      dockerfile: Dockerfile # path to dockerfile
+    ports:
+      - "3501:8080" # HOST_PORT:CONTAINER_PORT
+    networks:
+      - my-network
+
+  dockerapp2:
+    image: dockerapp #image name, Default:- Folder Name
+    build:
+      context: collect-calculator.query
+      dockerfile: Dockerfile # path to dockerfile
+    ports:
+      - "3502:8080" # HOST_PORT:CONTAINER_PORT
+    networks:
+      - my-network
+
+  apigateway:
+    image: apigateway
+    build:
+      context: collect-api-gateway
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+    ports:
+        - "8080:8080"
+    networks:
+      - my-network
+
+networks:
+  my-network:

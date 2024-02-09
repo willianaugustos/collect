@@ -1,0 +1,19 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v2/calculate/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7282
+        }
+      ],
+      "UpstreamPathTemplate": "/calculate/{id}",
+      "UpstreamHttpMethod": ["Get", "Post", "Put"]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7023"
+  }
+}
