@@ -2,27 +2,24 @@ version : '3'
 services: # Services to deploy
 
   dockerapp1:
-    image: dockerapp #image name, Default:- Folder Name
+    image: dockerapp:1.0 #image name, Default:- Folder Name
     build:
       context: collect-calculator.query
       dockerfile: Dockerfile # path to dockerfile
-    ports:
-      - "3501:8080" # HOST_PORT:CONTAINER_PORT
+    # ports:
+    #   - "3501:8080" # HOST_PORT:CONTAINER_PORT
     networks:
       - my-network
 
   dockerapp2:
-    image: dockerapp #image name, Default:- Folder Name
-    build:
-      context: collect-calculator.query
-      dockerfile: Dockerfile # path to dockerfile
-    ports:
-      - "3502:8080" # HOST_PORT:CONTAINER_PORT
+    image: dockerapp:1.0 #image name, Default:- Folder Name
+    # ports:
+    #   - "3502:8080" # HOST_PORT:CONTAINER_PORT
     networks:
       - my-network
 
   apigateway:
-    image: apigateway
+    image: apigateway:1.0
     build:
       context: collect-api-gateway
       dockerfile: Dockerfile

@@ -7,6 +7,10 @@
         {
           "Host": "dockerapp1",
           "Port": 8080
+        },
+        {
+          "Host": "dockerapp2",
+          "Port": 8080
         }
       ],
       "UpstreamPathTemplate": "/calculate2/{id}",
@@ -17,7 +21,11 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "dockerapp2",
+          "Host": "dockerapp1",
+          "Port": 8080
+        },
+        {
+          "Host": "dockerapp1",
           "Port": 8080
         }
       ],
