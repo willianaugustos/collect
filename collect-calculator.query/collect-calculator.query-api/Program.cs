@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace collect_calculator
 {
@@ -29,11 +30,23 @@ namespace collect_calculator
                         services.AddEndpointsApiExplorer();
 
                         // Add controllers and configure JSON serialization
-                        services.AddControllers()
-                        .AddNewtonsoftJson();
+                        services.AddControllers().AddNewtonsoftJson();
+                        
+                        services.AddSingleton(Log.Logger);
+                        
+                        Log.Logger = new LoggerConfiguration()
+                            .MinimumLevel.Information()
+                            .WriteTo.Console()
+                            .CreateLogger();
 
-                        //if (context.HostingEnvironment.IsDevelopment())
-                        //{
+                        services.AddLogging(x =>
+                        {
+                            x.ClearProviders();
+                            x.AddSerilog(dispose: true);
+                        });
+
+                        if (context.HostingEnvironment.IsDevelopment())
+                        {
                             services.AddSwaggerGen(options =>
                             {
                                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -41,7 +54,7 @@ namespace collect_calculator
                                 options.SwaggerDoc("v2", new OpenApiInfo { Title = "collect-calculator.query v2", Version = "2.0" });
                                 options.CustomSchemaIds(x => x.FullName);
                             });
-                        //}
+                        }
                     })
 
                     .Configure((app) =>

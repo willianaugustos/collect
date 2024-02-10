@@ -7,20 +7,24 @@ namespace collect_calculator.query_api.Controller.v2
     [ApiController]
     public class CalculateController : ControllerBase
     {
+        private readonly ILogger<CalculateController> _logger;
+        public CalculateController(ILogger<CalculateController> logger)
+        {
+                _logger = logger;
+        }
+
         [HttpGet("{Id}")]
         [MapToApiVersion("2.0")]
         public IActionResult Get(Guid Id)
         {
-            // Your logic to retrieve data based on the provided Id
-            // For demonstration purposes, let's assume we return a sample response
+            _logger.LogInformation("Request Received for v2: {0}", new { Id });
+
             var data = new
             {
                 Id,
                 Message = $"Data retrieved successfully v2.0. Machine Name: {Environment.MachineName}"
-                // Add more properties as needed
             };
 
-            // Return 200 OK status code along with the data
             return Ok(data);
         }
 
