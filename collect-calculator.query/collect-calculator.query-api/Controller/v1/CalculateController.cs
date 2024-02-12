@@ -1,18 +1,19 @@
 ﻿using Asp.Versioning;
-using collect_calculator.query_api.Controller.v2;
 using Microsoft.AspNetCore.Mvc;
 
 namespace collect_calculator.query_api.Controller.v1
 {
-    [Route("api/v1/[controller]")]
+    //[Route("api/v1/[controller]")]
+    [Route("api/v{v:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1")]
     public class CalculateController : ControllerBase
     {
 
         private readonly ILogger<CalculateController> _logger;
         public CalculateController(ILogger<CalculateController> logger)
         {
-                _logger = logger;
+            _logger = logger;
         }
 
         [HttpGet("{Id}")]

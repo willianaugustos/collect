@@ -1,1 +1,2 @@
-docker-compose -f collect-environment.yaml down 
+set RABBITMQ_DATA=D:\Will\RabbitMQData
+docker-compose -f ..\..\collect-environment.yaml down 

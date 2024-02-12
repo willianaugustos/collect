@@ -20,4 +20,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\collect-calculator.query-domain\collect-calculator.query-domain.csproj" />
+    <ProjectReference Include="..\collect-calculator.query-infra-ioc\collect-calculator.query-infra-ioc.csproj" />
+  </ItemGroup>
+
 </Project>

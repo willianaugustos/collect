@@ -29,6 +29,18 @@ services: # Services to deploy
         - "8080:8080"
     networks:
       - my-network
-
+  
+  rabbitmq:
+    image: rabbitmq:3.12.12-management
+    container_name: rabbitmq_hml
+    ports:
+      - "5672:5672" # RabbitMQ server
+      - "15672:15672" # RabbitMQ management console
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: paszword
+    volumes:
+       - ${RABBITMQ_DATA}:/var/lib/rabbitmq # Persist RabbitMQ data
+  
 networks:
   my-network:

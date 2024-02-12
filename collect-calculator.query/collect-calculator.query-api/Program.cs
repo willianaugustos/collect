@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using collect_calculator.query_infra_ioc.Modules;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
@@ -26,14 +27,22 @@ namespace collect_calculator
                             opt.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
                                                                             new HeaderApiVersionReader("x-api-version"),
                                                                             new MediaTypeApiVersionReader("x-api-version"));
+                        }).AddApiExplorer(options =>
+                        {
+                            options.GroupNameFormat = "'v'V";
+                            options.SubstituteApiVersionInUrl = true;
                         });
+
                         services.AddEndpointsApiExplorer();
 
                         // Add controllers and configure JSON serialization
                         services.AddControllers().AddNewtonsoftJson();
-                        
+
                         services.AddSingleton(Log.Logger);
-                        
+                        IConfiguration config = services.BuildServiceProvider().GetService<IConfiguration>() ?? throw new Exception("Error getting IConfiguration service");
+                        services.ConfigureServices(config);
+
+
                         Log.Logger = new LoggerConfiguration()
                             .MinimumLevel.Information()
                             .WriteTo.Console()
@@ -57,9 +66,8 @@ namespace collect_calculator
                         }
                     })
 
-                    .Configure((app) =>
+                    .Configure((configuration, app) =>
                     {
-
                         app.UseDeveloperExceptionPage();
 
                         app.UseSwagger();

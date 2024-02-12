@@ -1,1 +1,2 @@
-docker-compose -f collect-environment.yaml up --detach
+export PLATFORM=linux
+docker-compose -f ../../collect-environment.yaml up --detach
