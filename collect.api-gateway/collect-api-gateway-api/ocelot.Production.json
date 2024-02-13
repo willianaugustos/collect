@@ -46,7 +46,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/calculate1",
+      "UpstreamPathTemplate": "/calculate2",
       "UpstreamHttpMethod": [ "Post"]
     }
   ],

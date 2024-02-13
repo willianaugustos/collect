@@ -6,7 +6,7 @@ WORKDIR /Ap
 # Copy everything
 COPY . ./
 # Restore as distinct layers
-RUN dotnet restore collect-calculator.query-api/collect-calculator.query-api.csproj
+RUN dotnet restore collect-calculator.query-api/collect-calculator-api.csproj
 # Build and publish a release
 RUN dotnet publish -c Release -o out
 
@@ -15,4 +15,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /App
 COPY --from=build-env /Ap/out .
 
-ENTRYPOINT ["dotnet", "collect-calculator.query-api.dll"]
+ENTRYPOINT ["dotnet", "collect-calculator-api.dll"]

@@ -54,16 +54,16 @@ public class Program
                         x.AddSerilog(dispose: true);
                     });
 
-                    if (context.HostingEnvironment.IsDevelopment())
+                    //if (context.HostingEnvironment.IsDevelopment())
+                    //{
+                    services.AddSwaggerGen(options =>
                     {
-                        services.AddSwaggerGen(options =>
-                        {
-                            options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-                            options.SwaggerDoc("v1", new OpenApiInfo { Title = "v1", Version = "1.0" });
-                            options.SwaggerDoc("v2", new OpenApiInfo { Title = "v2", Version = "2.0" });
-                            options.CustomSchemaIds(x => x.FullName);
-                        });
-                    }
+                        options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                        options.SwaggerDoc("v1", new OpenApiInfo { Title = "v1", Version = "1.0" });
+                        options.SwaggerDoc("v2", new OpenApiInfo { Title = "v2", Version = "2.0" });
+                        options.CustomSchemaIds(x => x.FullName);
+                    });
+                    //}
                 })
 
                 .Configure((configuration, app) =>
@@ -76,7 +76,6 @@ public class Program
                             options.DefaultModelsExpandDepth(-1); // Collapse all models
                             options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
                             options.SwaggerEndpoint("/swagger/v2/swagger.json", "v2");
-                            options.InjectJavascript("/custom.js");
                         });
 
                     // Enable routing

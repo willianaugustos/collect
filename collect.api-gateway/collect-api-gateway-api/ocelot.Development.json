@@ -10,7 +10,19 @@
         }
       ],
       "UpstreamPathTemplate": "/calculate/{id}",
-      "UpstreamHttpMethod": ["Get", "Post", "Put"]
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v2/calculate",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7282
+        }
+      ],
+      "UpstreamPathTemplate": "/calculate",
+      "UpstreamHttpMethod": [ "Post" ]
     }
   ],
   "GlobalConfiguration": {

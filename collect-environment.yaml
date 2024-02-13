@@ -6,15 +6,17 @@ services: # Services to deploy
     build:
       context: collect.calculator-api
       dockerfile: Dockerfile # path to dockerfile
-    # ports:
-    #   - "3501:8080" # HOST_PORT:CONTAINER_PORT
+    environment:
+      RabbitMQSettings__ConnectionString: "amqp://admin:paszword@rabbitmq_hml"
+    ports:
+      - "3501:8080" # HOST_PORT:CONTAINER_PORT
     networks:
       - my-network
 
   dockerapp2:
     image: dockerapp:1.0 #image name, Default:- Folder Name
-    # ports:
-    #   - "3502:8080" # HOST_PORT:CONTAINER_PORT
+    ports:
+      - "3502:8080" # HOST_PORT:CONTAINER_PORT
     networks:
       - my-network
 
@@ -41,6 +43,8 @@ services: # Services to deploy
       RABBITMQ_DEFAULT_PASS: paszword
     volumes:
        - ${RABBITMQ_DATA}:/var/lib/rabbitmq # Persist RabbitMQ data
-  
+    networks:
+      - my-network
+        
 networks:
   my-network:
