@@ -1,0 +1,56 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v2/calculate/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dockerapp1",
+          "Port": 8080
+        },
+        {
+          "Host": "dockerapp2",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/calculate2/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/calculate/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dockerapp1",
+          "Port": 8080
+        },
+        {
+          "Host": "dockerapp1",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/calculate1/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v2/calculate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dockerapp1",
+          "Port": 8080
+        },
+        {
+          "Host": "dockerapp1",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/calculate1",
+      "UpstreamHttpMethod": [ "Post"]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8080"
+  }
+}
